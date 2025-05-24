@@ -1,9 +1,7 @@
 name: Build and Push Docker Image
 
 on:
-  push:
-    branches:
-      - main  # You can change this to any branch you prefer
+  workflow_dispatch
 
 env:
   IMAGE_NAME: arpitagrawal445/nodejs-app
