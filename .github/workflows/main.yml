@@ -28,3 +28,12 @@ jobs:
       - name: Push Docker image
         run: |
           docker push $IMAGE_NAME:$IMAGE_TAG
+
+      - name: Trigger Devtron Webhook
+        run: |
+          curl --location --request POST "http://34.170.30.39/orchestrator/webhook/ext-ci/1" \
+          --header "Content-Type: application/json" \
+          --header "api-token: ${{ secrets.DEVTRON_TOKEN }}" \
+          --data-raw "{
+            \"dockerImage\": \"${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}\"
+          }"
